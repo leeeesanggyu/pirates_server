@@ -27,7 +27,7 @@ public class ProductApiController {
     public Long AddProductTest() {
         AddProductDTO dto = AddProductDTO.builder()
             .name("kimchi")
-            .description("descriptionzzzzzzzzzz")
+            .description("kimchi description")
             .build();
         return productService.add(dto);
     }
