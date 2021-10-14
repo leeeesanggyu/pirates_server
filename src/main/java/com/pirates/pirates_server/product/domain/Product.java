@@ -1,4 +1,4 @@
-package com.pirates.pirates_server.product.entity;
+package com.pirates.pirates_server.product.domain;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -23,17 +23,24 @@ public class Product {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "delivery_id")
-    private Delivery delivery;
-
-    @ManyToOne
-    @JoinColumn(name = "options_id")
-    private Options options;
+//    @ManyToOne
+//    @JoinColumn(name = "delivery_id")
+//    private Delivery delivery;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "options_id")
+//    private Options options;
 
     @Builder
-    public Product(String name, String description) {
+    public Product(
+        String name,
+        String description
+//        Delivery delivery,
+//        Options options
+    ) {
         this.name = name;
         this.description = description;
+//        this.delivery = delivery;
+//        this.options = options;
     }
 }

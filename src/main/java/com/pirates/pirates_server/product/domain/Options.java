@@ -1,4 +1,4 @@
-package com.pirates.pirates_server.product.entity;
+package com.pirates.pirates_server.product.domain;
 
 import lombok.Builder;
 import lombok.Getter;
