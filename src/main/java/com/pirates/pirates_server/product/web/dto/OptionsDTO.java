@@ -7,31 +7,30 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Getter
 @NoArgsConstructor
-public class AddProductDTO {
+public class OptionsDTO {
     private String name;
-    private String description;
-    private DeliveryDTO delivery;
-    private OptionsDTO[] options;
+    private int price;
+    private int stock;
 
     @Builder
-    public AddProductDTO(
+    public OptionsDTO(
         String name,
-        String description
+        int price,
+        int stock
     ) {
         this.name = name;
-        this.description = description;
+        this.price = price;
+        this.stock = stock;
     }
 
-    public Product toProductEntity() {
-        return Product.builder()
+    public Options toOptionsEntity() {
+        return Options.builder()
                 .name(name)
-                .description(description)
+                .price(price)
+                .stock(stock)
                 .build();
     }
-
 
 }
