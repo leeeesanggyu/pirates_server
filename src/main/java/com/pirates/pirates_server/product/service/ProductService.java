@@ -22,27 +22,21 @@ public class ProductService {
 
     @Transactional
     public Long Add(AddProductDTO dto) {
+        // product
+        Product product_entity = dto.toProductEntity();
 
-        // options save (save all 로 바꾸기)
+        // options
         OptionsDTO[] optionsDTOs = dto.getOptions();
 
-        List<Options> options_entity = new ArrayList<Options>();
         for(int i=0; i<optionsDTOs.length; i++) {
-            options_entity.add(optionsRepo.save(optionsDTOs[i].toOptionsEntity()));
+            product_entity.getOptions().add(optionsDTOs[i].toOptionsEntity());
         }
-        System.out.println("=================");
-        System.out.println(options_entity.get(0).getName());
-        System.out.println("=================");
 
-        // delivery save
-        Delivery delivery_entity = deliveryRepo.save(dto.getDelivery().toDeliveryEntity());
-        System.out.println("=================");
-        System.out.println(delivery_entity.getType());
-        System.out.println("=================");
+        // delivery
+        Delivery delivery_entity = dto.getDelivery().toDeliveryEntity();
+        product_entity.setDelivery(delivery_entity);
 
-        // product save
-        Long product_id = productRepo.save(dto.toProductEntity()).getId();
-        return product_id;
+        return productRepo.save(product_entity).getId();
     }
 
     public List<Product> FindAll() {

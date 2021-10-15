@@ -1,14 +1,19 @@
 package com.pirates.pirates_server.product.domain;
 
+import com.pirates.pirates_server.product.web.dto.AddProductDTO;
+import com.pirates.pirates_server.product.web.dto.DeliveryDTO;
 import com.pirates.pirates_server.product.web.dto.OptionsDTO;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
-@Getter
+//@Getter
+//@Setter
+@Data
 @NoArgsConstructor
 @Entity
 @Table(name = "product")
@@ -25,11 +30,20 @@ public class Product {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "options_id")
-    private Options[] options;
+    @CreationTimestamp
+    private LocalDateTime create_at;
 
-    @ManyToOne
+    @OneToMany(
+            targetEntity = Options.class,
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(name = "options_id")
+    private List<Options> options = new ArrayList<>();
+
+    @OneToOne(
+            targetEntity = Delivery.class,
+            cascade = CascadeType.ALL
+    )
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 
@@ -41,4 +55,7 @@ public class Product {
         this.name = name;
         this.description = description;
     }
+
+
+
 }

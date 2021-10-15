@@ -1,12 +1,13 @@
 package com.pirates.pirates_server.product.domain;
 
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Getter
+@Data
 @NoArgsConstructor
 @Entity
 @Table(name = "delivery")
